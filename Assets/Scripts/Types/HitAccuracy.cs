@@ -4,9 +4,8 @@ namespace Types
     {
         None,
         Perfect,
+        Great,
         Good,
-        Okay,
-        Bad,
         Miss
     }
 }

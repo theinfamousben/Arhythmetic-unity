@@ -4,6 +4,8 @@ using System.Diagnostics.CodeAnalysis;
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 public static class Constants
 {
+    public const bool DEV = true;
+    
     public const int BUTTON_1_NOTE = 60;
     public const int BUTTON_2_NOTE = 61;
     public const int BUTTON_3_NOTE = 62;
@@ -25,9 +27,8 @@ public static class Constants
         { "Button8", BUTTON_8_NOTE }
     };
     
-    public const float PERFECT_HIT_WINDOW = 0.040f; // 40ms
-    public const float GOOD_HIT_WINDOW    = 0.080f; // 80ms
-    public const float OKAY_HIT_WINDOW    = 0.120f; // 120ms
-    public const float BAD_HIT_WINDOW     = 0.180f; // 180ms
-    public const float MISS_HIT_WINDOW    = 0.250f; // 250ms
+    public const double PERFECT_HIT_WINDOW = 0.040; // 40ms
+    public const double GREAT_HIT_WINDOW   = 0.080; // 80ms
+    public const double GOOD_HIT_WINDOW    = 0.130; // 130ms
+    public const double MISS_HIT_WINDOW    = 0.160; // 160ms
 }

@@ -24,11 +24,27 @@ namespace Types
         public string songName;
         public string artist;
         public List<NoteEvent> events;
-        public float bpm; // do we need this or should we just go from seconds?
+        public float bpm;
         public int[] timeSignature; // [numerator, denominator]
         public int pickupBeats; // how many notes before the first measure, should be less than timeSignature[0] 
         [Obsolete("Swing is not implemented yet", true)]
         public float swingAmount; 
+
+        public void PrepareEvents()
+        {
+            events ??= new List<NoteEvent>();
+
+            int denominator = timeSignature[1];
+            double secondsPerBeat = 60d / bpm * 4d / denominator;
+            foreach (var noteEvent in events)
+            {
+                // Existing beat-authored charts are converted once; explicit times are preserved.
+                if (noteEvent.time == 0d && noteEvent.beat != 0f && secondsPerBeat > 0d)
+                    noteEvent.time = noteEvent.beat * secondsPerBeat;
+            }
+
+            events.Sort((left, right) => left.time.CompareTo(right.time));
+        }
 
         public List<NoteEvent> GetCurrentNotes(float time)
         {
@@ -44,6 +60,7 @@ namespace Types
     
     public class NoteEvent
     {
+        public double time;
         public float beat;
         public int note;
         public int length; // how many beats the note lasts, 0 for a single note
