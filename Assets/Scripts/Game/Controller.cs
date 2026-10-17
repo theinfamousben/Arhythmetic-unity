@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using TMPro;
 using Types;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,23 +8,49 @@ namespace Game
 {
     public class Controller : MonoBehaviour
     {
-        public float timer;
-        public SongData songData;
-        public float accuracy;
+        [SerializeField] private TMP_Text noteCount;
+        [SerializeField] private TMP_Text accuracyText;
+        
+        public static float Timer;
+        public static SongData SongData;
+        public static float Accuracy;
 
         void Start()
         {
-            timer = 0;
+            noteCount.text = "0/" + SongData.events.Count;
+            accuracyText.text = "[]";
+            
+            Timer = 0;
         }
         
         void Update()
         {
-            timer += Time.deltaTime;
+            Timer += Time.deltaTime;
         }
 
         private void AddInput(string input)
         {
+            EvaluateKeypress(input);
             Debug.Log(input);
+        }
+
+        private List<NoteEvent> SeparateNotes()
+        {
+            var notes = new List<NoteEvent>();
+
+            foreach (var note in SongData.events)
+            {
+                
+            }
+
+            return notes;
+        }
+
+        private void EvaluateKeypress(string input)
+        {
+            var keypress = Constants.BUTTON_NOTE_MAPPING[input];
+            
+            
         }
 
         void Awake()
